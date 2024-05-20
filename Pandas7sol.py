@@ -70,3 +70,15 @@ def count_salary_categories(accounts: pd.DataFrame) -> pd.DataFrame:
     avgdf = accounts[(accounts['income'] >= 20000) & (accounts['income'] <= 50000)]
     highdf = accounts[accounts['income'] > 50000]
     return pd.DataFrame([['Low Salary', len(lowdf)], ['Average Salary', len(avgdf)], ['High Salary', len(highdf)]], columns = ['category', 'accounts_count'])
+
+
+import pandas as pd
+
+def count_salary_categories(accounts: pd.DataFrame) -> pd.DataFrame:
+    lowgroup = accounts['income'] < 20000
+    avggroup = (accounts['income'] >= 20000) & (accounts['income'] <= 50000)
+    highgroup = accounts['income'] > 50000
+    lowcount = lowgroup.sum()
+    avgcount = avggroup.sum()
+    highcount = highgroup.sum()
+    return pd.DataFrame([['Low Salary', lowcount], ['Average Salary', avgcount], ['High Salary', highcount]], columns = ['category', 'accounts_count'])
